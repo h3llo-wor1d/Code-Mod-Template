@@ -1,0 +1,7 @@
+{
+    "Id": "CodeModTemplate",
+    "Name": "Code Mod Template",
+    "ModAuthor": "Fuji Team",
+    "Description": "This is a simple template for code mods to use in using the Celeste 64 Fuji Mod Loader",
+    "Version": "1.0.0"
+}
