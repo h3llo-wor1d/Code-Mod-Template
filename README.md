@@ -25,7 +25,7 @@ Inside the csproj file, we recommend that you set the `AssemblyName` property to
 
 Rename the `Source/TemplateGameMod.cs` file to a name that better represents your mod (i.e. MyModGameMod.cs). Rename the class inside the file to match it as well.
 
-Delete or Rename the `Source/TemplateModSettings.cs` file depending on if your mod has settings that need to configure things.
+Delete or Rename the `Source/TemplateModSettings.cs` file depending on if your mod will have settings to let thee player configure things.
 
 In `Fuji.json`, edit all of the fields to match the details of your mod.
 
