@@ -24,6 +24,7 @@ To prepare your mod for release, publish your project (In CLI: `dotnet publish`)
 
 > [!TIP]
 > If you wish to preserve the source code of the mod when releasing it, pass the `PreserveSource` property with a value of `Yes`. e.g. `dotnet publish -property:PreserveSource=Yes`
+> 
 > The `bin` and `obj` folders will be removed automatically for you.
 
 Note: This template is still a work in progress, and may change and evolve over time.
