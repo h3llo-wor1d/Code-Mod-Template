@@ -37,7 +37,7 @@ To build the mod, build your project (In CLI: `dotnet build` from the Source fol
 To prepare your mod for release, publish your project (In CLI: `dotnet publish` from the Source folder). This will output a zipped version of your mod that is ready to release. Feel free to rename the zip, and consider looking through the files in the zip to delete any extra files you don't want included.
 
 > [!TIP]
-> If you wish to preserve the source code of the mod when releasing it, pass the `PreserveSource` property with a value of `Yes`. e.g. `dotnet publish -property:PreserveSource=Yes`
+> If you wish to preserve the source code of the mod when releasing it, pass the `PreserveSource` property with a value of `true`. e.g. `dotnet publish -property:PreserveSource=true`
 >
 > If you do preserve the source code, the `bin`, `obj`, and `.vs` folders will be removed automatically for you.
 

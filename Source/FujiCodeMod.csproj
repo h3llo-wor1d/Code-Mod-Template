@@ -7,20 +7,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <!-- https://stackoverflow.com/a/45296160 -->
-  <Choose>
-    <When Condition=" '$(PreserveSource)' == 'Yes' ">
-      <PropertyGroup>
-        <FilesToExclude>..\.gitignore;..\README.md;..\Celeste64.dll;..\.git\**\*.*;..\Source\.vs\**\*.*;..\Source\bin\**\*.*;..\Source\obj\**\*.*</FilesToExclude>
-      </PropertyGroup>
-    </When>
-    <Otherwise>
-      <PropertyGroup>
-        <FilesToExclude>..\.gitignore;..\README.md;..\Celeste64.dll;..\.git\**\*.*;..\Source\**\*.*</FilesToExclude>
-      </PropertyGroup>
-    </Otherwise>
-  </Choose>
-
   <ItemGroup>
     <PackageReference Include="FosterFramework" Version="0.1.18-alpha" />
     <PackageReference Include="MonoMod.RuntimeDetour" Version="25.1.0-prerelease.2" />
@@ -33,22 +19,25 @@
   </ItemGroup>
 
   <Target Name="CopyToLibraries" AfterTargets="Build" Inputs="$(OutputPath)\$(AssemblyName).dll" Outputs="..\Libraries">
-    <Copy SourceFiles="$(OutputPath)\$(AssemblyName).dll" DestinationFolder="..\Libraries" />
-  </Target>
+		<Copy SourceFiles="$(OutputPath)\$(AssemblyName).dll" DestinationFolder="..\Libraries" />
+		<Copy SourceFiles="$(OutputPath)\$(AssemblyName).pdb" DestinationFolder="..\Libraries" />
+	</Target>
 
   <Target Name="PrepareModZip" AfterTargets="Publish" Inputs="$(OutputPath)\$(AssemblyName).dll" Outputs="..\Libraries">
     <RemoveDir Directories="..\$(MSBuildProjectName)" />
-    <Delete Files="..\$(MSBuildProjectName).zip" />
+		<Delete Files="..\$(MSBuildProjectName).zip" />
 
-    <ItemGroup>
-      <ThisDir Include="..\**\*.*" Exclude="$(FilesToExclude)" />
-    </ItemGroup>
+		<ItemGroup>
+			<IncludeFiles Condition=" '$(PreserveSource)' == 'true' " Include="..\**\*.*" Exclude="..\.gitignore;..\README.md;..\Celeste64.dll;..\.git\**\*.*;..\Source\.vs\**\*.*;..\Source\bin\**\*.*;..\Source\obj\**\*.*"/>
+			<IncludeFiles Condition=" '$(PreserveSource)' != 'true' " Include="..\**\*.*" Exclude="..\.gitignore;..\README.md;..\Celeste64.dll;..\.git\**\*.*;..\Source\**\*.*"/>
+		</ItemGroup>
 
-    <Copy SourceFiles="@(ThisDir)" DestinationFolder="..\$(MSBuildProjectName)\%(RecursiveDir)" />
+    <Copy SourceFiles="@(IncludeFiles)" DestinationFolder="..\$(MSBuildProjectName)\%(RecursiveDir)" />
 
     <ZipDirectory
         SourceDirectory="..\$(MSBuildProjectName)"
-        DestinationFile="..\$(MSBuildProjectName).zip" />
+        DestinationFile="..\$(MSBuildProjectName).zip"
+				Overwrite="true"/>
 
     <RemoveDir Directories="..\$(MSBuildProjectName)" />
   </Target>
