@@ -11,24 +11,24 @@
   <Choose>
     <When Condition=" '$(PreserveSource)' == 'Yes' ">
       <PropertyGroup>
-        <DirsToCleanup>..\Release\Source\bin;..\Release\Source\obj;</DirsToCleanup>
+        <FilesToExclude>..\.gitignore;..\README.md;..\Celeste64.dll;..\.git\**\*.*;..\Source\.vs\**\*.*;..\Source\bin\**\*.*;..\Source\obj\**\*.*</FilesToExclude>
       </PropertyGroup>
     </When>
     <Otherwise>
       <PropertyGroup>
-        <DirsToCleanup>..\Release\Source</DirsToCleanup>
+        <FilesToExclude>..\.gitignore;..\README.md;..\Celeste64.dll;..\.git\**\*.*;..\Source\**\*.*</FilesToExclude>
       </PropertyGroup>
     </Otherwise>
   </Choose>
 
   <ItemGroup>
     <PackageReference Include="FosterFramework" Version="0.1.18-alpha" />
-    <PackageReference Include="MonoMod.RuntimeDetour" Version="25.1.0-prerelease.2"/>
-		<PackageReference Include="Sledge.Formats.Map" Version="1.1.5" />
-		<Reference Include="Celeste64">
-      <HintPath>./Celeste64.dll</HintPath>
-      <HintPath>$(FujiDir)/Celeste64.dll</HintPath>
-      <HintPath>../../../Celeste64.dll</HintPath>
+    <PackageReference Include="MonoMod.RuntimeDetour" Version="25.1.0-prerelease.2" />
+    <PackageReference Include="Sledge.Formats.Map" Version="1.1.5" />
+    <Reference Include="Celeste64">
+      <HintPath Condition="Exists('./Celeste64.dll')">./Celeste64.dll</HintPath>
+      <HintPath Condition="Exists('../../../Celeste64.dll')">../../../Celeste64.dll</HintPath>
+      <HintPath Condition="Exists('$(FujiDir)/Celeste64.dll')">$(FujiDir)/Celeste64.dll</HintPath>
     </Reference>
   </ItemGroup>
 
@@ -37,19 +37,19 @@
   </Target>
 
   <Target Name="PrepareModZip" AfterTargets="Publish" Inputs="$(OutputPath)\$(AssemblyName).dll" Outputs="..\Libraries">
-    <RemoveDir Directories="..\Release" />
+    <RemoveDir Directories="..\$(MSBuildProjectName)" />
+    <Delete Files="..\$(MSBuildProjectName).zip" />
 
     <ItemGroup>
-      <ThisDir Include="..\**\*.*" />
+      <ThisDir Include="..\**\*.*" Exclude="$(FilesToExclude)" />
     </ItemGroup>
 
-    <Copy SourceFiles="@(ThisDir)" DestinationFolder="..\Release\%(RecursiveDir)" />
+    <Copy SourceFiles="@(ThisDir)" DestinationFolder="..\$(MSBuildProjectName)\%(RecursiveDir)" />
 
-    <ItemGroup>
-      <FilesToCleanup Include="..\Release\*.sln" />
-    </ItemGroup>
+    <ZipDirectory
+        SourceDirectory="..\$(MSBuildProjectName)"
+        DestinationFile="..\$(MSBuildProjectName).zip" />
 
-    <Delete Files="@(FilesToCleanup)" />
-    <RemoveDir Directories="$(DirsToCleanup)"/>
+    <RemoveDir Directories="..\$(MSBuildProjectName)" />
   </Target>
 </Project>
