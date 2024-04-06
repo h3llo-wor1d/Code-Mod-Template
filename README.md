@@ -16,6 +16,9 @@ This template is built to not care about where you put it, however there's two t
 - Hot reloading will not work unless you take the care to set up a symlink yourself.
 
 ## Editing the template
+
+Make sure the root folder for your mod is renamed to have a unique name that represents your mod.
+
 Rename the `Source/FujiCodeMod.csproj` file to match the name of your mod.
 
 Inside the csproj file, we recommend that you set the `AssemblyName` property to the name/ID of your mod.
