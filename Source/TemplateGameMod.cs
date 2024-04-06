@@ -1,8 +1,8 @@
-﻿namespace FujiCodeMod;
-
-using Celeste64;
+﻿using Celeste64;
 using Celeste64.Mod;
 using Foster.Framework;
+
+namespace FujiCodeMod;
 
 // For code mods, you must have a class extending from Fuji's GameMod class. This is the entry point of your mod.
 // Rename this class and file to better reflect your own mod.

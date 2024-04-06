@@ -1,8 +1,11 @@
 ﻿using Celeste64.Mod;
 
+namespace FujiCodeMod;
+
 // This file allows you to provide custom mod settings that users can change to configure your mod.
 // If you don't need it, you can simply delete it.
 // If you do want to use it, rename the file and class to better represent your mod. The content inside is just for reference, and can be deleted.
+// Every mod should only have a single settings file that defines its settings
 public class TemplateModSettings : GameModSettings
 {
 	/* - Example Int Setting */
