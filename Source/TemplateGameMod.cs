@@ -11,22 +11,22 @@ public class TemplateGameMod : GameMod
 	// This template includes some common functions:
 	public override void OnModLoaded()
 	{
-		// Ran when the mod is loaded.
+		// Runs when the mod is loaded.
 		Log.Info($"Hello from {GetType()}");
 	}
 
 	public override void OnModUnloaded()
 	{
-		// Ran when the mod is unloaded.
+		// Runs when the mod is unloaded.
 	}
 
 	public override void OnGameLoaded(Game game)
 	{
-		// Ran when the game has finished loading.
+		// Runs when the game has finished loading.
 	}
 
 	public override void Update(float deltaTime)
 	{
-		// Ran every frame.
+		// Runs every frame.
 	}
 }
