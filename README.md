@@ -1,6 +1,9 @@
 # Celeste 64 Fuji Code Mod Template
 This is a Template for a code mod for the Celeste 64 Fuji Mod Loader. This template gives you a basic C# project that can be compiled into a code mod.
 
+## Clone the template
+To get started, you may either `git clone` the template, or click the green "Use this template" button on the repository home page [(direct link)](https://github.com/new?template_name=Code-Mod-Template&template_owner=FujiAPI) to add it as a repository on your GitHub account.
+
 ## Preparing for code modding
 This template is built to not care about where you put it, however there's two things to note:
 
