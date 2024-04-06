@@ -4,7 +4,7 @@ This is a Template that can be used to create a code mod for the Celeste 64 Fuji
 ## Clone the template
 To get started, you may either `git clone` the template, or click the green "Use this template" button on the repository home page [(direct link)](https://github.com/new?template_name=Code-Mod-Template&template_owner=FujiAPI) to add it as a repository on your GitHub account.
 
-If you do not wish to use git, you can also just [download this template project as a zip](https://github.com/FujiAPI/Code-Mod-Template/archive/refs/heads/main.zip), and put the unzipped version into your mod folder.
+If you do not wish to use git, you can also just [download this template project as a zip](https://github.com/FujiAPI/Code-Mod-Template/archive/refs/heads/main.zip), and unzip it.
 
 ## Preparing for code modding
 This template is built to not care about where you put it, however there's two things to note:
@@ -15,9 +15,9 @@ This template is built to not care about where you put it, however there's two t
 - Or, if you feel like it, paste the `Celeste64.dll` directly into your mod's `Source` folder.
 - Hot reloading will not work unless you take the care to set up a symlink yourself.
 
-## Editing the template
+You should also consider renaming the mod folder to something unique representing your mod.
 
-Make sure the root folder for your mod is renamed to have a unique name that represents your mod.
+## Editing the template
 
 Rename the `Source/FujiCodeMod.csproj` file to match the name of your mod.
 
