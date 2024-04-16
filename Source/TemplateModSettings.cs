@@ -9,10 +9,10 @@ namespace FujiCodeMod;
 public class TemplateModSettings : GameModSettings
 {
 	/* - Example Int Setting */
-	//[SettingRange(0, 20)]
-	//[SettingDescription("Int Setting Description")]
-	//[SettingName("Int Setting Name")]
-	//public int IntSetting { get; set; } = 5;
+	[SettingRange(0, 20)]
+	[SettingDescription("Int Setting Description")]
+	[SettingName("Int Setting Name")]
+	public int IntSetting { get; set; } = 5;
 
 	/* - Example Enum Setting */
 	//public enum Directions
@@ -25,6 +25,7 @@ public class TemplateModSettings : GameModSettings
 	//[SettingDescription("Enum Setting Description")]
 	//[SettingName("Enum Setting Name")]
 	//public Directions DirectionSetting { get; set; } = Directions.East;
+
 
 	/* - Example Spacer. Will add an empty row before the next item. */
 	//[SettingSpacer]

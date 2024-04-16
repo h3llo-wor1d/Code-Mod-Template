@@ -5,9 +5,12 @@
     <AssemblyName>FujiCodeMod</AssemblyName>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Buttplug" Version="3.0.1" />
+    <PackageReference Include="Buttplug.Client.Connectors.WebsocketConnector" Version="3.0.1" />
     <PackageReference Include="FosterFramework" Version="0.1.18-alpha" />
     <PackageReference Include="MonoMod.RuntimeDetour" Version="25.1.0-prerelease.2" />
     <PackageReference Include="Sledge.Formats.Map" Version="1.1.5" />
@@ -18,26 +21,38 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Text\" />
+  </ItemGroup>
+
   <Target Name="CopyToLibraries" AfterTargets="Build" Inputs="$(OutputPath)\$(AssemblyName).dll" Outputs="..\Libraries">
 		<Copy SourceFiles="$(OutputPath)\$(AssemblyName).dll" DestinationFolder="..\Libraries" />
 		<Copy SourceFiles="$(OutputPath)\$(AssemblyName).pdb" DestinationFolder="..\Libraries" />
 	</Target>
+
+	<Target Name="CopyToLibraries" AfterTargets="Build" Inputs="$(OutputPath)\$(AssemblyName).dll" Outputs="..\Libraries">
+		<Copy SourceFiles="$(OutputPath)\$(AssemblyName).dll" DestinationFolder="..\Libraries" />
+		<Copy SourceFiles="$(OutputPath)\$(AssemblyName).pdb" DestinationFolder="..\Libraries" />
+		<Copy SourceFiles="$(OutputPath)\Buttplug.dll" DestinationFolder="..\Libraries" />
+		<Copy SourceFiles="$(OutputPath)\Buttplug.Client.Connectors.WebsocketConnector.dll" DestinationFolder="..\Libraries" />
+		<Copy SourceFiles="$(OutputPath)\Newtonsoft.Json.dll" DestinationFolder="..\Libraries" />
+		<Copy SourceFiles="$(OutputPath)\deniszykov.WebSocketListener.dll" DestinationFolder="..\Libraries" />
+	</Target>
+	
 
   <Target Name="PrepareModZip" AfterTargets="Publish" Inputs="$(OutputPath)\$(AssemblyName).dll" Outputs="..\Libraries">
     <RemoveDir Directories="..\$(MSBuildProjectName)" />
 		<Delete Files="..\$(MSBuildProjectName).zip" />
 
 		<ItemGroup>
-			<IncludeFiles Condition=" '$(PreserveSource)' == 'true' " Include="..\**\*.*" Exclude="..\.gitignore;..\README.md;..\Celeste64.dll;..\.git\**\*.*;..\Source\.vs\**\*.*;..\Source\bin\**\*.*;..\Source\obj\**\*.*"/>
-			<IncludeFiles Condition=" '$(PreserveSource)' != 'true' " Include="..\**\*.*" Exclude="..\.gitignore;..\README.md;..\Celeste64.dll;..\.git\**\*.*;..\Source\**\*.*"/>
+			<IncludeFiles Condition=" '$(PreserveSource)' == 'true' " Include="..\**\*.*" Exclude="..\.gitignore;..\README.md;..\Celeste64.dll;..\.git\**\*.*;..\Source\.vs\**\*.*;..\Source\bin\**\*.*;..\Source\obj\**\*.*" />
+			<IncludeFiles Condition=" '$(PreserveSource)' != 'true' " Include="..\**\*.*" Exclude="..\.gitignore;..\README.md;..\Celeste64.dll;..\.git\**\*.*;..\Source\**\*.*" />
 		</ItemGroup>
 
     <Copy SourceFiles="@(IncludeFiles)" DestinationFolder="..\$(MSBuildProjectName)\%(RecursiveDir)" />
+	
 
-    <ZipDirectory
-        SourceDirectory="..\$(MSBuildProjectName)"
-        DestinationFile="..\$(MSBuildProjectName).zip"
-				Overwrite="true"/>
+    <ZipDirectory SourceDirectory="..\$(MSBuildProjectName)" DestinationFile="..\$(MSBuildProjectName).zip" Overwrite="true" />
 
     <RemoveDir Directories="..\$(MSBuildProjectName)" />
   </Target>
